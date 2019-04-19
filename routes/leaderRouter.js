@@ -37,11 +37,12 @@ leaderRouter.route('/:leaderId').all((req, res, next) => {
   res.end('Will send the leadership: ' + req.params.leaderId + ' to you!');
 })
 .post((req,res,next) => {
-  res.end('Will add the leadership: '+ req.params.leaderId +' also: '+ req.body.name + ' with details: ' + req.body.description);
+  res.statusCode = 403;
+  res.end('POST operation not supported on /leader/'+ req.params.leaderId);
 })
 .put((req, res, next) => {
-  res.statusCode = 403;
-  res.end('PUT operation not supported on leadership:'+ req.params.leaderId );
+  res.write('Updating the leader: '+ req.params.leaderId + '.\n');
+  res.end('Will update the leader: ' + req.body.name + ' with details: ' + req.body.description);
 })
 .delete((req, res, next) => {
     res.end('Deleting leadership: ' + req.params.leaderId);

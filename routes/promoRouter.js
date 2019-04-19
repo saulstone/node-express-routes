@@ -37,11 +37,12 @@ promoRouter.route('/:promoId').all((req, res, next) => {
   res.end('Will send the promotions: ' + req.params.promoId + ' to you!');
 })
 .post((req,res,next) => {
-  res.end('Will add the promotion: '+ req.params.promoId +' also: '+ req.body.name + ' with details: ' + req.body.description);
+  res.statusCode = 403;
+  res.end('POST operation not supported on /promotions/'+ req.params.promoId);
 })
 .put((req, res, next) => {
-  res.statusCode = 403;
-  res.end('PUT operation not supported on promotions:'+ req.params.promoId );
+  res.write('Updating the promotion: '+ req.params.promoId + '.\n');
+  res.end('Will update the promotion: ' + req.body.name + ' with details: ' + req.body.description);
 })
 .delete((req, res, next) => {
     res.end('Deleting promotions: ' + req.params.promoId);
